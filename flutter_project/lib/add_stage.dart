@@ -14,8 +14,9 @@ class _AddStagePageState extends State<AddStagePage> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
-  TextEditingController stagiaireIdController = TextEditingController();
-  TextEditingController departmentController = TextEditingController();
+  TextEditingController stagaireNomController = TextEditingController();
+  TextEditingController stagaireEmailController = TextEditingController();
+  TextEditingController entrepriseController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,16 @@ class _AddStagePageState extends State<AddStagePage> {
             TextFormField(
               controller: titleController,
               decoration: InputDecoration(labelText: 'Title'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter a title';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: entrepriseController,
+              decoration: InputDecoration(labelText: 'Entreprise'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a title';
@@ -63,18 +74,18 @@ class _AddStagePageState extends State<AddStagePage> {
               },
             ),
             TextFormField(
-              controller: stagiaireIdController,
-              decoration: InputDecoration(labelText: 'Stagiaire ID'),
+              controller: stagaireNomController,
+              decoration: InputDecoration(labelText: 'Stagaire nom complet'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter the stagiaire ID';
+                  return 'Please enter the stagaire name';
                 }
                 return null;
               },
             ),
             TextFormField(
-              controller: departmentController,
-              decoration: InputDecoration(labelText: 'Department'),
+              controller: stagaireEmailController,
+              decoration: InputDecoration(labelText: 'Stagaire email'),
             ),
             ElevatedButton(
               onPressed: _addStage,
@@ -88,20 +99,28 @@ class _AddStagePageState extends State<AddStagePage> {
 
   Future<void> _addStage() async {
     if (_formKey.currentState!.validate()) {
-      final db = SqlDb();
-      await db.insertData('''
-        INSERT INTO stage (id, titre, description, dateDebut, dateFin, stagiaireId, departement)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+      try {
+        final db = SqlDb();
+        await db.insertData('''
+        INSERT INTO stage (id, titre, description, dateDebut, dateFin, stagaireNom, stagaireEmail, entreprise)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
       ''', [
-        DateTime.now().millisecondsSinceEpoch.toString(), // Generating a unique ID based on timestamp
-        titleController.text,
-        descriptionController.text,
-        startDateController.text,
-        endDateController.text,
-        stagiaireIdController.text,
-        departmentController.text
-      ]);
-      Navigator.pop(context, true);  // Return true when a stage is successfully added
+          DateTime.now()
+              .millisecondsSinceEpoch
+              .toString(), // Generating a unique ID based on timestamp
+          titleController.text,
+          descriptionController.text,
+          startDateController.text,
+          endDateController.text,
+          stagaireNomController.text,
+          stagaireEmailController.text,
+          entrepriseController.text
+        ]);
+        Navigator.pop(
+            context, true); // Return true when a stage is successfully added
+      } catch (e) {
+        print('Error inserting stage: $e');
+      }
     }
   }
 
@@ -111,8 +130,9 @@ class _AddStagePageState extends State<AddStagePage> {
     descriptionController.dispose();
     startDateController.dispose();
     endDateController.dispose();
-    stagiaireIdController.dispose();
-    departmentController.dispose();
+    stagaireNomController.dispose();
+    stagaireEmailController.dispose();
+    entrepriseController.dispose();
     super.dispose();
   }
 }

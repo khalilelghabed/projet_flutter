@@ -3,7 +3,7 @@ import 'package:path/path.dart';
 
 class SqlDb {
   static Database? _db;
-  
+
   // Getter to ensure we only have a single instance of the database.
   Future<Database?> get db async {
     if (_db == null) {
@@ -39,7 +39,7 @@ class SqlDb {
         telephone TEXT
       );
     ''');
-    await db.execute('''
+    /*await db.execute('''
       CREATE TABLE stagiaire (
         id TEXT PRIMARY KEY,
         nom TEXT,
@@ -47,7 +47,7 @@ class SqlDb {
         email TEXT,
         telephone TEXT
       );
-    ''');
+    ''');*/
     await db.execute('''
       CREATE TABLE stage (
         id TEXT PRIMARY KEY,
@@ -55,39 +55,29 @@ class SqlDb {
         description TEXT,
         dateDebut TEXT,
         dateFin TEXT,
-        stagiaireId TEXT,
-        departement TEXT,
-        FOREIGN KEY (stagiaireId) REFERENCES stagiaire(id)
+        stagaireNom TEXT,
+        stagaireEmail TEXT,
+        entreprise TEXT
       );
     ''');
-    await db.execute('''
-      CREATE TABLE mission (
-        id TEXT PRIMARY KEY,
-        description TEXT,
-        dateDebut TEXT,
-        dateFin TEXT,
-        etat BOOLEAN,
-        stagiaireId TEXT,
-        FOREIGN KEY (stagiaireId) REFERENCES stagiaire(id)
-      );
-    ''');
-    await db.execute('''
+
+    /*await db.execute('''
       CREATE TABLE realisation (
         titre TEXT,
         description TEXT,
         date TEXT,
-        stagiaireId TEXT,
-        FOREIGN KEY (stagiaireId) REFERENCES stagiaire(id)
+        stageId TEXT,
+        FOREIGN KEY (stageId) REFERENCES stage(id)
       );
-    ''');
+    ''');*/
     await db.execute('''
       CREATE TABLE objectif (
         titre TEXT,
         description TEXT,
         dateLimite TEXT,
         critereReussite TEXT,
-        stagiaireId TEXT,
-        FOREIGN KEY (stagiaireId) REFERENCES stagiaire(id)
+        stageId TEXT,
+        FOREIGN KEY (stageId) REFERENCES stage(id)
       );
     ''');
     print("Database created and tables initialized!");
