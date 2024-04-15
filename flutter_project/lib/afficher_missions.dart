@@ -39,6 +39,42 @@ class _AfficherMissionsPageState extends State<AfficherMissionsPage> {
     _fetchMissionsData();
   }
 
+  // Méthode pour supprimer une mission
+  Future<void> _deleteMission(int missionId) async {
+    // Afficher une boîte de dialogue pour confirmer la suppression de la mission
+    bool confirmDelete = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Supprimer la mission'),
+          content: Text('Êtes-vous sûr de vouloir supprimer cette mission ?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false); // Return false on cancel
+              },
+              child: Text('Annuler'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true); // Return true on confirm
+              },
+              child: Text('Supprimer'),
+            ),
+          ],
+        );
+      },
+    ) ?? false; // Handling null (i.e., if the dialog is dismissed)
+
+    // If confirmed, proceed with deletion
+    if (confirmDelete) {
+      // Delete the mission from the database
+      await SqlDb().deleteData('DELETE FROM mission WHERE id = ?', [missionId]);
+      // Refresh the mission list
+      _fetchMissionsData();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,8 +128,7 @@ class _AfficherMissionsPageState extends State<AfficherMissionsPage> {
                           IconButton(
                             icon: Icon(Icons.delete),
                             onPressed: () {
-                              // Mettre en œuvre la logique pour supprimer la mission
-                              // (non implémenté dans cet exemple)
+                              _deleteMission(mission['id']); // Supprimer la mission
                             },
                           ),
                           // Bouton Marquer comme terminée ou non terminée
@@ -102,36 +137,8 @@ class _AfficherMissionsPageState extends State<AfficherMissionsPage> {
                                 ? Icon(Icons.check_circle)
                                 : Icon(Icons.circle),
                             onPressed: () {
-                              // Afficher une boîte de dialogue pour confirmer le changement d'état de la mission
-                              showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  title: Text(isCompleted
-                                      ? 'Marquer comme non terminée'
-                                      : 'Marquer comme terminée'),
-                                  content: Text(isCompleted
-                                      ? 'Êtes-vous sûr de vouloir marquer cette mission comme non terminée ?'
-                                      : 'Êtes-vous sûr de vouloir marquer cette mission comme terminée ?'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(
-                                            context); // Fermer la boîte de dialogue
-                                      },
-                                      child: Text('Annuler'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        _markMissionAsCompleted(mission[
-                                            'id']); // Marquer la mission comme terminée
-                                        Navigator.pop(
-                                            context); // Fermer la boîte de dialogue
-                                      },
-                                      child: Text('Confirmer'),
-                                    ),
-                                  ],
-                                ),
-                              );
+                              _markMissionAsCompleted(mission[
+                                  'id']); // Marquer la mission comme terminée
                             },
                           ),
                         ],
