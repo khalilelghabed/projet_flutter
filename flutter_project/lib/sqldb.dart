@@ -17,7 +17,7 @@ class SqlDb {
   // Initialize the database.
   initialDb() async {
     String databasePath = await getDatabasesPath();
-    String path = join(databasePath, 'first.db');
+    String path = join(databasePath, 'firsttt.db');
     Database mydb = await openDatabase(path,
         onCreate: _onCreate, version: 1, onUpgrade: _onUpgrade);
     return mydb;
@@ -57,10 +57,21 @@ class SqlDb {
         dateFin TEXT,
         stagaireNom TEXT,
         stagaireEmail TEXT,
-        entreprise TEXT
+        entreprise TEXT,
+        photoProfil BLOB
       );
     ''');
-
+    await db.execute('''
+      CREATE TABLE mission (
+        id TEXT PRIMARY KEY,
+        description TEXT,
+        dateDebut TEXT,
+        dateFin TEXT,
+        etat BOOLEAN,
+        stageId TEXT,
+        FOREIGN KEY (stageId) REFERENCES stage(id)
+      );
+    ''');
     /*await db.execute('''
       CREATE TABLE realisation (
         titre TEXT,
@@ -72,6 +83,7 @@ class SqlDb {
     ''');*/
     await db.execute('''
       CREATE TABLE objectif (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         titre TEXT,
         description TEXT,
         dateLimite TEXT,

@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'edit_stage.dart';
 import 'home_page.dart';
 import 'SqlDb.dart';
+import 'objectifs.dart';
 import 'realisations.dart';
 
 class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({super.key, required this.idstage});
+  const CustomDrawer({Key? key, required this.idstage}) : super(key: key);
   final String idstage;
 
   @override
@@ -20,17 +21,18 @@ class _CustomDrawerState extends State<CustomDrawer> {
   @override
   void initState() {
     super.initState();
-    _stageData = SqlDb().readData('SELECT * FROM stage where id=?', [widget.idstage]);
+    _stageData =
+        SqlDb().readData('SELECT * FROM stage where id=?', [widget.idstage]);
   }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: const EdgeInsets.all(0),
+      backgroundColor: Color.fromARGB(255, 69, 98, 104),
+      child: Column(
         children: [
-          SizedBox(
-            height: 138,
+          Container(
+            margin: EdgeInsets.zero,
             child: FutureBuilder(
               future: _stageData,
               builder:
@@ -43,86 +45,115 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   var stage = snapshot.data![0];
 
                   return DrawerHeader(
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 97, 25, 14),
-                    ),
-                    child: UserAccountsDrawerHeader(
-                      //margin: EdgeInsets.all(0),
-                      decoration: BoxDecoration(color: Color.fromARGB(255, 97, 25, 14)),
-                      accountName: Text(
-                        stage["titre"],
-                        style: TextStyle(fontSize: 18),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            stage["titre"],
+                            style: TextStyle(fontSize: 22, color: Colors.white),
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            "Entreprise: ${stage["entreprise"]}",
+                            style: TextStyle(fontSize: 14, color: Colors.white),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
-                      accountEmail: Text(stage["entreprise"]),
                     ),
                   );
-
-
-
                 } else {
                   return const Center(child: Text("No stages found."));
                 }
               },
             ),
           ),
-          ListTile(
-            splashColor: Colors.redAccent[100],
-            leading: const Icon(Icons.info),
-            title: const Text(' Informations '),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => MyHomePage(idstage: widget.idstage)),
-              );
-            },
-          ),
-          ListTile(
-            splashColor: Colors.redAccent[100],
-            leading: const Icon(Icons.receipt_long),
-            title: const Text(' Missions '),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            splashColor: Colors.redAccent[100],
-            leading: const Icon(Icons.task),
-            title: const Text(' Objectifs '),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            splashColor: Colors.redAccent[100],
-            leading: const Icon(Icons.rule),
-            title: const Text(' Réalisations '),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => Realisations(idstage: widget.idstage)),
-              );
-            },
-          ),
-          ListTile(
-            splashColor: Colors.redAccent[100],
-            leading: const Icon(Icons.edit),
-            title: const Text(' Modifier '),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => EditStagePage(idstage: widget.idstage)),
-              );
-            },
-          ),
-          ListTile(
-            splashColor: Colors.redAccent[100],
-            leading: const Icon(Icons.logout),
-            title: const Text(' Quitter '),
-            onTap: () {
-              Navigator.of(context)..pop()..pop();
-            },
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                ListTile(
+                  splashColor: Color.fromARGB(203, 69, 98, 104),
+                  leading: const Icon(Icons.home, color: Colors.white),
+                  title: const Text(' Accueil ',
+                      style: TextStyle(color: Colors.white)),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              MyHomePage(idstage: widget.idstage)),
+                    );
+                  },
+                ),
+                ListTile(
+                  splashColor: Color.fromARGB(90, 69, 98, 104),
+                  leading: const Icon(Icons.receipt_long, color: Colors.white),
+                  title: const Text(' Missions ',
+                      style: TextStyle(color: Colors.white)),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ListTile(
+                  splashColor: Color.fromARGB(203, 69, 98, 104),
+                  leading: const Icon(Icons.format_list_numbered,
+                      color: Colors.white),
+                  title: const Text(' Objectifs ',
+                      style: TextStyle(color: Colors.white)),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Objectif(idstage: widget.idstage)),
+                    );
+                  },
+                ),
+                ListTile(
+                  splashColor: Color.fromARGB(203, 69, 98, 104),
+                  leading: const Icon(Icons.rule, color: Colors.white),
+                  title: const Text(' Réalisations ',
+                      style: TextStyle(color: Colors.white)),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Realisations(idstage: widget.idstage)),
+                    );
+                  },
+                ),
+                ListTile(
+                  splashColor: Color.fromARGB(90, 69, 98, 104),
+                  leading: const Icon(Icons.edit, color: Colors.white),
+                  title: const Text(' Modifier ',
+                      style: TextStyle(color: Colors.white)),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              EditStagePage(idstage: widget.idstage)),
+                    );
+                  },
+                ),
+                ListTile(
+                  splashColor: Color.fromARGB(203, 69, 98, 104),
+                  leading: const Icon(Icons.logout, color: Colors.white),
+                  title: const Text(' Quitter ',
+                      style: TextStyle(color: Colors.white)),
+                  onTap: () {
+                    Navigator.of(context)
+                      ..pop()
+                      ..pop();
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),
