@@ -13,6 +13,7 @@ class StagePage extends StatefulWidget {
 class _StagePageState extends State<StagePage> {
   late Future<List<Map>> _stageData;
   TextEditingController _searchController = TextEditingController();
+  final List<String> _selectedStageIds = [];
 
   @override
   void initState() {
@@ -39,12 +40,62 @@ class _StagePageState extends State<StagePage> {
     });
   }
 
+  void _toggleStageSelection(String id) {
+    setState(() {
+      if (_selectedStageIds.contains(id)) {
+        _selectedStageIds.remove(id);
+      } else {
+        _selectedStageIds.add(id);
+      }
+    });
+  }
+
+  Future<void> _deleteSelectedStages() async {
+    bool confirmDelete = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirmer la suppression'),
+          content: Text('Êtes-vous sûr de vouloir supprimer les stages sélectionnés ?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('Annuler'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: Text('Supprimer'),
+            ),
+          ],
+        );
+      },
+    ) ?? false;
+
+    if (confirmDelete) {
+      for (String id in _selectedStageIds) {
+        await SqlDb().deleteData('DELETE FROM stage WHERE id = ?', [id]);
+      }
+      setState(() {
+        _selectedStageIds.clear();
+      });
+      refreshStages();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Liste des stages"),
         centerTitle: true,
+        actions: _selectedStageIds.isNotEmpty
+            ? [
+                IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: _deleteSelectedStages,
+                )
+              ]
+            : [],
       ),
       body: RefreshIndicator(
         onRefresh: _handleRefresh,
@@ -78,20 +129,25 @@ class _StagePageState extends State<StagePage> {
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         var stage = snapshot.data![index];
+                        bool isSelected = _selectedStageIds.contains(stage['id'].toString());
                         return ListTile(
                           title: Text(stage['titre'] ?? 'No Title'),
-                          subtitle: Text(
-                              "Start: ${stage['dateDebut']} - End: ${stage['dateFin']}"),
+                          subtitle: Text("Start: ${stage['dateDebut']} - End: ${stage['dateFin']}"),
+                          selected: isSelected,
+                          selectedTileColor: Colors.blue[100],
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MyHomePage(
-                                  idstage: stage['id'],
+                            if (_selectedStageIds.isNotEmpty) {
+                              _toggleStageSelection(stage['id'].toString());
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MyHomePage(idstage: stage['id']),
                                 ),
-                              ),
-                            );
+                              );
+                            }
                           },
+                          onLongPress: () => _toggleStageSelection(stage['id'].toString()),
                         );
                       },
                     );
