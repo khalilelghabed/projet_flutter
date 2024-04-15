@@ -21,7 +21,6 @@ class _EditStagePageState extends State<EditStagePage> {
   TextEditingController stagiaireNomController = TextEditingController();
   TextEditingController stagiaireEmailController = TextEditingController();
   TextEditingController entrepriseController = TextEditingController();
-  Uint8List? _photoProfil;
 
   late Future<List<Map>> _stageData;
   @override

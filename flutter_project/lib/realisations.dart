@@ -16,9 +16,11 @@ class _RealisationsState extends State<Realisations> {
   @override
   void initState() {
     super.initState();
-    //_realisationsData = SqlDb().readData('SELECT * FROM mission where stageId=? etat=?', [widget.idstage,1]);
-    _realisationsData =
-        SqlDb().readData('SELECT * FROM mission where etat=?', [1]);
+    _realisationsData = SqlDb().readData(
+        'SELECT * FROM mission where stageId=? and etat=?',
+        [widget.idstage, 1]);
+    // _realisationsData =
+    //     SqlDb().readData('SELECT * FROM mission where etat=?', [true]);
   }
 
   @override

@@ -16,6 +16,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      debugShowCheckedModeBanner:
+          false, // Set to false to remove the debug banner
       home:
           const StagePage(), // Set MyHomePage as the initial route/home widget
     );

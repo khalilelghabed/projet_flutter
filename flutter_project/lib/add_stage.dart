@@ -22,7 +22,7 @@ class _AddStagePageState extends State<AddStagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add Stage"),
+        title: const Text("Ajouter des stages"),
       ),
       body: Form(
         key: _formKey,
@@ -89,7 +89,15 @@ class _AddStagePageState extends State<AddStagePage> {
             ),
             ElevatedButton(
               onPressed: _addStage,
-              child: Text('Add Stage'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  const Color.fromARGB(255, 69, 98, 104),
+                ),
+                foregroundColor: MaterialStateProperty.all<Color>(
+                  Colors.white,
+                ),
+              ),
+              child: Text('Ajouter'),
             ),
           ],
         ),

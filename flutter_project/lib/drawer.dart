@@ -6,6 +6,7 @@ import 'home_page.dart';
 import 'SqlDb.dart';
 import 'objectifs.dart';
 import 'realisations.dart';
+import 'afficher_missions.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({Key? key, required this.idstage}) : super(key: key);
@@ -95,7 +96,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   title: const Text(' Missions ',
                       style: TextStyle(color: Colors.white)),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              AfficherMissionsPage(idStage: widget.idstage)),
+                    );
                   },
                 ),
                 ListTile(
