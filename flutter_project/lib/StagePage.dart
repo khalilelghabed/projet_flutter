@@ -132,7 +132,7 @@ class _StagePageState extends State<StagePage> {
                         bool isSelected = _selectedStageIds.contains(stage['id'].toString());
                         return ListTile(
                           title: Text(stage['titre'] ?? 'No Title'),
-                          subtitle: Text("Start: ${stage['dateDebut']} - End: ${stage['dateFin']}"),
+                          subtitle: Text("Début: ${stage['dateDebut']} - Fin: ${stage['dateFin']}"),
                           selected: isSelected,
                           selectedTileColor: Colors.blue[100],
                           onTap: () {

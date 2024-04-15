@@ -55,7 +55,7 @@ class _AddStagePageState extends State<AddStagePage> {
             ),
             TextFormField(
               controller: startDateController,
-              decoration: InputDecoration(labelText: 'Start Date'),
+              decoration: InputDecoration(labelText: 'Date début'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter the start date';
@@ -65,7 +65,7 @@ class _AddStagePageState extends State<AddStagePage> {
             ),
             TextFormField(
               controller: endDateController,
-              decoration: InputDecoration(labelText: 'End Date'),
+              decoration: InputDecoration(labelText: 'Date fin'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter the end date';
