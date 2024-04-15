@@ -39,6 +39,20 @@ class SqlDb {
         telephone TEXT
       );
     ''');
+    await db.execute('''
+  CREATE TABLE mission (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    titre TEXT , 
+    description TEXT,
+    dateDebut TEXT,
+    dateFin TEXT,
+    etat BOOLEAN DEFAULT false,
+    stageId TEXT,
+    FOREIGN KEY (stageId) REFERENCES stage(id)
+  );
+''');
+
     /*await db.execute('''
       CREATE TABLE stagiaire (
         id TEXT PRIMARY KEY,
