@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'SqlDb.dart';
 import 'drawer.dart';
 import 'home_page.dart'; // Ensure this is pointing to your SqlDb class correctly
-import 'dart:typed_data';
 
 class EditStagePage extends StatefulWidget {
-  const EditStagePage({Key? key, required this.idstage}) : super(key: key);
+  const EditStagePage({super.key, required this.idstage});
   final String idstage;
 
   @override
@@ -74,12 +73,12 @@ class _EditStagePageState extends State<EditStagePage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Informations sur le Stage',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 69, 98, 104)),
+                            color: Color.fromARGB(255, 69, 98, 104)),
                       ),
                       SizedBox(height: 10),
                       TextFormField(

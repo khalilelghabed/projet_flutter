@@ -46,20 +46,20 @@ class _AfficherMissionsPageState extends State<AfficherMissionsPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Supprimer la mission'),
-          content: Text('Êtes-vous sûr de vouloir supprimer cette mission ?'),
+          title: const Text('Supprimer la mission'),
+          content: const Text('Êtes-vous sûr de vouloir supprimer cette mission ?'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(false); // Return false on cancel
               },
-              child: Text('Annuler'),
+              child: const Text('Annuler'),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(true); // Return true on confirm
               },
-              child: Text('Supprimer'),
+              child: const Text('Supprimer'),
             ),
           ],
         );
@@ -91,7 +91,7 @@ class _AfficherMissionsPageState extends State<AfficherMissionsPage> {
         future: _missionsData,
         builder: (BuildContext context, AsyncSnapshot<List<Map>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text("Error: ${snapshot.error}"));
           } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
@@ -113,7 +113,7 @@ class _AfficherMissionsPageState extends State<AfficherMissionsPage> {
                         children: [
                           // Bouton Modifier
                           IconButton(
-                            icon: Icon(Icons.edit),
+                            icon: const Icon(Icons.edit),
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -126,7 +126,7 @@ class _AfficherMissionsPageState extends State<AfficherMissionsPage> {
                           ),
                           // Bouton Supprimer
                           IconButton(
-                            icon: Icon(Icons.delete),
+                            icon: const Icon(Icons.delete),
                             onPressed: () {
                               _deleteMission(mission['id']); // Supprimer la mission
                             },
@@ -134,8 +134,8 @@ class _AfficherMissionsPageState extends State<AfficherMissionsPage> {
                           // Bouton Marquer comme terminée ou non terminée
                           IconButton(
                             icon: isCompleted
-                                ? Icon(Icons.check_circle)
-                                : Icon(Icons.circle),
+                                ? const Icon(Icons.check_circle)
+                                : const Icon(Icons.circle),
                             onPressed: () {
                               _markMissionAsCompleted(mission[
                                   'id']); // Marquer la mission comme terminée
@@ -155,13 +155,13 @@ class _AfficherMissionsPageState extends State<AfficherMissionsPage> {
                         );
                       },
                     ),
-                    Divider(), // Ajouter une ligne de séparation entre chaque mission
+                    const Divider(), // Ajouter une ligne de séparation entre chaque mission
                   ],
                 );
               },
             );
           } else {
-            return Center(child: Text("Aucune mission trouvée."));
+            return const Center(child: Text("Aucune mission trouvée."));
           }
         },
       ),
@@ -176,7 +176,7 @@ class _AfficherMissionsPageState extends State<AfficherMissionsPage> {
             _fetchMissionsData();
           });
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -191,7 +191,7 @@ class MissionDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Détails de la Mission'),
+        title: const Text('Détails de la Mission'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -200,22 +200,22 @@ class MissionDetailsPage extends StatelessWidget {
           children: [
             Text(
               'Titre : ${mission['titre'] ?? ''}',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Description : ${mission['description'] ?? ''}',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Date de début : ${mission['dateDebut']}',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Date de fin : ${mission['dateFin']}',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
           ],
         ),

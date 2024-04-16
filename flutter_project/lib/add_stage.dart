@@ -27,11 +27,11 @@ class _AddStagePageState extends State<AddStagePage> {
       body: Form(
         key: _formKey,
         child: ListView(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           children: <Widget>[
             TextFormField(
               controller: titleController,
-              decoration: InputDecoration(labelText: 'Title'),
+              decoration: const InputDecoration(labelText: 'Title'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a title';
@@ -41,7 +41,7 @@ class _AddStagePageState extends State<AddStagePage> {
             ),
             TextFormField(
               controller: entrepriseController,
-              decoration: InputDecoration(labelText: 'Entreprise'),
+              decoration: const InputDecoration(labelText: 'Entreprise'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a title';
@@ -51,11 +51,11 @@ class _AddStagePageState extends State<AddStagePage> {
             ),
             TextFormField(
               controller: descriptionController,
-              decoration: InputDecoration(labelText: 'Description'),
+              decoration: const InputDecoration(labelText: 'Description'),
             ),
             TextFormField(
               controller: startDateController,
-              decoration: InputDecoration(labelText: 'Date début'),
+              decoration: const InputDecoration(labelText: 'Date début'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter the start date';
@@ -65,7 +65,7 @@ class _AddStagePageState extends State<AddStagePage> {
             ),
             TextFormField(
               controller: endDateController,
-              decoration: InputDecoration(labelText: 'Date fin'),
+              decoration: const InputDecoration(labelText: 'Date fin'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter the end date';
@@ -75,7 +75,7 @@ class _AddStagePageState extends State<AddStagePage> {
             ),
             TextFormField(
               controller: stagaireNomController,
-              decoration: InputDecoration(labelText: 'Stagaire nom complet'),
+              decoration: const InputDecoration(labelText: 'Stagaire nom complet'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter the stagaire name';
@@ -85,7 +85,7 @@ class _AddStagePageState extends State<AddStagePage> {
             ),
             TextFormField(
               controller: stagaireEmailController,
-              decoration: InputDecoration(labelText: 'Stagaire email'),
+              decoration: const InputDecoration(labelText: 'Stagaire email'),
             ),
             ElevatedButton(
               onPressed: _addStage,
@@ -97,7 +97,7 @@ class _AddStagePageState extends State<AddStagePage> {
                   Colors.white,
                 ),
               ),
-              child: Text('Ajouter'),
+              child: const Text('Ajouter'),
             ),
           ],
         ),

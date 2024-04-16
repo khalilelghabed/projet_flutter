@@ -59,10 +59,10 @@ class _ObjectifState extends State<Objectif> {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(4)),
                             color: Colors.white,
                           ),
@@ -71,7 +71,7 @@ class _ObjectifState extends State<Objectif> {
                               width: 400,
                               child: Text(
                                 "Descriptions : ${objectif["description"]}",
-                                style: TextStyle(color: Colors.black),
+                                style: const TextStyle(color: Colors.black),
                               )),
                         ),
                         Row(
@@ -82,7 +82,7 @@ class _ObjectifState extends State<Objectif> {
                               children: [
                                 IconButton(
                                   color: Colors.white,
-                                  icon: Icon(Icons.edit),
+                                  icon: const Icon(Icons.edit),
                                   onPressed: () {
                                     showDialog(
                                         context: context,
@@ -93,7 +93,7 @@ class _ObjectifState extends State<Objectif> {
                                 ),
                                 IconButton(
                                   color: Colors.white,
-                                  icon: Icon(Icons.delete),
+                                  icon: const Icon(Icons.delete),
                                   onPressed: () {
                                     _deleteobjectif(objectif["id"]);
                                   },
@@ -107,20 +107,20 @@ class _ObjectifState extends State<Objectif> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    tileColor: Color.fromARGB(210, 69, 98, 104),
+                    tileColor: const Color.fromARGB(210, 69, 98, 104),
                     textColor: Colors.white,
                   ),
                 );
               },
             );
           } else {
-            return const Center(child: Text("No réalisations found."));
+            return const Center(child: Text("No objectifs."));
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color.fromARGB(255, 227, 254, 247),
-        foregroundColor: Color.fromARGB(255, 69, 98, 104),
+        foregroundColor: const Color.fromARGB(255, 69, 98, 104),
         onPressed: () {
           showDialog(
               context: context,

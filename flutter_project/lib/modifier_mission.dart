@@ -54,7 +54,7 @@ class _ModifierMissionPageState extends State<ModifierMissionPage> {
 
     // Afficher un message de succès
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
         content: Text('La mission a été modifiée avec succès.'),
         backgroundColor: Colors.green,
       ),

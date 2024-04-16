@@ -9,7 +9,7 @@ import 'realisations.dart';
 import 'afficher_missions.dart';
 
 class CustomDrawer extends StatefulWidget {
-  const CustomDrawer({Key? key, required this.idstage}) : super(key: key);
+  const CustomDrawer({super.key, required this.idstage});
   final String idstage;
 
   @override

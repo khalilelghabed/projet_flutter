@@ -26,11 +26,11 @@ class _AddMissionPageState extends State<AddMissionPage> {
       body: Form(
         key: _formKey,
         child: ListView(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           children: <Widget>[
             TextFormField(
               controller: titreController,
-              decoration: InputDecoration(labelText: 'titre'),
+              decoration: const InputDecoration(labelText: 'titre'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a description';
@@ -40,7 +40,7 @@ class _AddMissionPageState extends State<AddMissionPage> {
             ),
             TextFormField(
               controller: descriptionController,
-              decoration: InputDecoration(labelText: 'Description'),
+              decoration: const InputDecoration(labelText: 'Description'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a description';
@@ -50,7 +50,7 @@ class _AddMissionPageState extends State<AddMissionPage> {
             ),
             TextFormField(
               controller: startDateController,
-              decoration: InputDecoration(labelText: 'Start Date'),
+              decoration: const InputDecoration(labelText: 'Start Date'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a start date';
@@ -60,7 +60,7 @@ class _AddMissionPageState extends State<AddMissionPage> {
             ),
             TextFormField(
               controller: endDateController,
-              decoration: InputDecoration(labelText: 'End Date'),
+              decoration: const InputDecoration(labelText: 'End Date'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter an end date';
@@ -69,6 +69,14 @@ class _AddMissionPageState extends State<AddMissionPage> {
               },
             ),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  const Color.fromARGB(255, 69, 98, 104),
+                ),
+                foregroundColor: MaterialStateProperty.all<Color>(
+                  Colors.white,
+                ),
+              ),
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   try {
@@ -95,7 +103,7 @@ class _AddMissionPageState extends State<AddMissionPage> {
                   }
                 }
               },
-              child: Text('Add Mission'),
+              child: const Text('Add Mission'),
             ),
           ],
         ),
