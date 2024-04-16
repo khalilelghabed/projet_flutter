@@ -25,7 +25,6 @@ class SqlDb {
 
   // Handle database upgrades.
   _onUpgrade(Database db, int oldVersion, int newVersion) {
-    print("on upgrade called");
   }
 
   // Create tables upon database creation.
@@ -95,7 +94,6 @@ class SqlDb {
         FOREIGN KEY (stageId) REFERENCES stage(id)
       );
     ''');
-    print("Database created and tables initialized!");
   }
 
   // CRUD Operations:

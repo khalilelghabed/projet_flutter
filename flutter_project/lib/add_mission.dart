@@ -4,7 +4,7 @@ import 'SqlDb.dart';
 class AddMissionPage extends StatefulWidget {
   final String stageId;
 
-  const AddMissionPage({Key? key, required this.stageId}) : super(key: key);
+  const AddMissionPage({super.key, required this.stageId});
 
   @override
   _AddMissionPageState createState() => _AddMissionPageState();
@@ -16,7 +16,6 @@ class _AddMissionPageState extends State<AddMissionPage> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,7 +95,6 @@ class _AddMissionPageState extends State<AddMissionPage> {
                     );
                     Navigator.pop(context);
                   } catch (e) {
-                    print('Error inserting mission: $e');
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Failed to add mission')),
                     );

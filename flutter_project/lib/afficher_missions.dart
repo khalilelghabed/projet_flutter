@@ -7,8 +7,7 @@ import 'drawer.dart';
 class AfficherMissionsPage extends StatefulWidget {
   final String idStage;
 
-  const AfficherMissionsPage({Key? key, required this.idStage})
-      : super(key: key);
+  const AfficherMissionsPage({super.key, required this.idStage});
 
   @override
   _AfficherMissionsPageState createState() => _AfficherMissionsPageState();
@@ -185,7 +184,7 @@ class _AfficherMissionsPageState extends State<AfficherMissionsPage> {
 class MissionDetailsPage extends StatelessWidget {
   final Map<String, dynamic> mission;
 
-  const MissionDetailsPage({Key? key, required this.mission}) : super(key: key);
+  const MissionDetailsPage({super.key, required this.mission});
 
   @override
   Widget build(BuildContext context) {

@@ -12,7 +12,7 @@ class StagePage extends StatefulWidget {
 
 class _StagePageState extends State<StagePage> {
   late Future<List<Map>> _stageData;
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   final List<String> _selectedStageIds = [];
 
   @override
@@ -55,16 +55,16 @@ class _StagePageState extends State<StagePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Confirmer la suppression'),
-          content: Text('Êtes-vous sûr de vouloir supprimer les stages sélectionnés ?'),
+          title: const Text('Confirmer la suppression'),
+          content: const Text('Êtes-vous sûr de vouloir supprimer les stages sélectionnés ?'),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: Text('Annuler'),
+              child: const Text('Annuler'),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Supprimer'),
+              child: const Text('Supprimer'),
             ),
           ],
         );
@@ -107,7 +107,7 @@ class _StagePageState extends State<StagePage> {
                 controller: _searchController,
                 decoration: InputDecoration(
                   labelText: 'Rechercher',
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25),
                   ),

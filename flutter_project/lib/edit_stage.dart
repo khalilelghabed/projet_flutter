@@ -66,9 +66,9 @@ class _EditStagePageState extends State<EditStagePage> {
                   TextEditingController(text: stage["entreprise"]);
 
               return ListView(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 children: <Widget>[
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   // Section for Stage Information
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,10 +80,10 @@ class _EditStagePageState extends State<EditStagePage> {
                             fontWeight: FontWeight.bold,
                             color: Color.fromARGB(255, 69, 98, 104)),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFormField(
                         controller: titleController,
-                        decoration: InputDecoration(labelText: 'Titre'),
+                        decoration: const InputDecoration(labelText: 'Titre'),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Veuillez entrer un titre';
@@ -93,7 +93,7 @@ class _EditStagePageState extends State<EditStagePage> {
                       ),
                       TextFormField(
                         controller: entrepriseController,
-                        decoration: InputDecoration(labelText: 'Entreprise'),
+                        decoration: const InputDecoration(labelText: 'Entreprise'),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Veuillez entrer le nom de l\'entreprise';
@@ -103,11 +103,11 @@ class _EditStagePageState extends State<EditStagePage> {
                       ),
                       TextFormField(
                         controller: descriptionController,
-                        decoration: InputDecoration(labelText: 'Description'),
+                        decoration: const InputDecoration(labelText: 'Description'),
                       ),
                       TextFormField(
                         controller: startDateController,
-                        decoration: InputDecoration(labelText: 'Date de début'),
+                        decoration: const InputDecoration(labelText: 'Date de début'),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Veuillez entrer la date de début';
@@ -117,7 +117,7 @@ class _EditStagePageState extends State<EditStagePage> {
                       ),
                       TextFormField(
                         controller: endDateController,
-                        decoration: InputDecoration(labelText: 'Date de fin'),
+                        decoration: const InputDecoration(labelText: 'Date de fin'),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Veuillez entrer la date de fin';
@@ -130,17 +130,17 @@ class _EditStagePageState extends State<EditStagePage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Informations sur le Stagiaire',
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 69, 98, 104)),
+                            color: Color.fromARGB(255, 69, 98, 104)),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFormField(
                         controller: stagiaireNomController,
-                        decoration: InputDecoration(labelText: 'Nom complet'),
+                        decoration: const InputDecoration(labelText: 'Nom complet'),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Veuillez entrer le nom complet du stagiaire';
@@ -151,11 +151,11 @@ class _EditStagePageState extends State<EditStagePage> {
                       TextFormField(
                         controller: stagiaireEmailController,
                         decoration:
-                            InputDecoration(labelText: 'Email du stagiaire'),
+                            const InputDecoration(labelText: 'Email du stagiaire'),
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: _editStage,
                     style: ButtonStyle(
@@ -166,7 +166,7 @@ class _EditStagePageState extends State<EditStagePage> {
                         Colors.white,
                       ),
                     ),
-                    child: Text('sauvegarder'),
+                    child: const Text('sauvegarder'),
                   ),
                 ],
               );

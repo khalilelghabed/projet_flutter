@@ -3,7 +3,7 @@ import 'drawer.dart'; // Make sure this points to your custom drawer file
 import 'SqlDb.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.idstage}) : super(key: key);
+  const MyHomePage({super.key, required this.idstage});
   final String idstage;
 
   @override

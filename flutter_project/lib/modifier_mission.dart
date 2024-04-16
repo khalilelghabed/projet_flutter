@@ -68,7 +68,7 @@ class _ModifierMissionPageState extends State<ModifierMissionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Modifier Mission'),
+        title: const Text('Modifier Mission'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -77,21 +77,21 @@ class _ModifierMissionPageState extends State<ModifierMissionPage> {
           children: [
             TextFormField(
               controller: _titreController,
-              decoration: InputDecoration(labelText: 'Titre'),
+              decoration: const InputDecoration(labelText: 'Titre'),
             ),
             TextFormField(
               controller: _descriptionController,
-              decoration: InputDecoration(labelText: 'Description'),
+              decoration: const InputDecoration(labelText: 'Description'),
             ),
             TextFormField(
               controller: _startDateController,
-              decoration: InputDecoration(labelText: 'Date de début'),
+              decoration: const InputDecoration(labelText: 'Date de début'),
             ),
             TextFormField(
               controller: _endDateController,
-              decoration: InputDecoration(labelText: 'Date de fin'),
+              decoration: const InputDecoration(labelText: 'Date de fin'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -100,7 +100,7 @@ class _ModifierMissionPageState extends State<ModifierMissionPage> {
                     // Annuler la modification et revenir à la page précédente
                     Navigator.pop(context);
                   },
-                  child: Text('Annuler'),
+                  child: const Text('Annuler'),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -108,27 +108,27 @@ class _ModifierMissionPageState extends State<ModifierMissionPage> {
                     showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        title: Text('Confirmation'),
-                        content: Text('Voulez-vous vraiment modifier cette mission ?'),
+                        title: const Text('Confirmation'),
+                        content: const Text('Voulez-vous vraiment modifier cette mission ?'),
                         actions: [
                           TextButton(
                             onPressed: () {
                               Navigator.pop(context); // Fermer la boîte de dialogue
                             },
-                            child: Text('Annuler'),
+                            child: const Text('Annuler'),
                           ),
                           TextButton(
                             onPressed: () {
                               _updateMission(); // Mettre à jour la mission
                               Navigator.pop(context); // Fermer la boîte de dialogue
                             },
-                            child: Text('Confirmer'),
+                            child: const Text('Confirmer'),
                           ),
                         ],
                       ),
                     );
                   },
-                  child: Text('Modifier Mission'),
+                  child: const Text('Modifier Mission'),
                 ),
               ],
             ),

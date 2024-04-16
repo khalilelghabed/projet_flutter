@@ -127,7 +127,7 @@ class _AddStagePageState extends State<AddStagePage> {
         Navigator.pop(
             context, true); // Return true when a stage is successfully added
       } catch (e) {
-        print('Error inserting stage: $e');
+        // print('Error inserting stage: $e');
       }
     }
   }
